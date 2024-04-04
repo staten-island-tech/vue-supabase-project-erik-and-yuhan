@@ -28,6 +28,7 @@ onMounted(() => {
 <ul>
     <li v-for="person in persons" :key="person.id">{{ person.Name }}</li>
   </ul>
+  
   <ul>
     <li v-for="country in countries" :key="country.id">{{ country.name }}</li>
   </ul>

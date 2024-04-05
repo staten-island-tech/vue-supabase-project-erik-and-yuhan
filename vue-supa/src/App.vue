@@ -9,6 +9,8 @@ async function getCountries() {
   const { data } = await supabase.from('countries').select()
   countries.value = data
   console.log(data)
+  
+
 }
 const persons = ref([])
 async function getNames() {

@@ -1,15 +1,17 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <label for="Quote">Your words</label>
+<input type="text" name="Quote" id="Quote">
 </template>
+<script>
 
+const DOMSelectors = {
+input1: document.querySelector("input")
+
+}
+
+</script>
 <style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
+.quote{
+  margin-left: 500px;
 }
 </style>

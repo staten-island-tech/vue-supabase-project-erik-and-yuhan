@@ -35,7 +35,6 @@ onMounted(() => {
     <li v-for="country in countries" :key="country.id">{{ country.name }}</li>
   </ul>
 
-<RouterLink to="/about">Log In Here</RouterLink>
+<RouterLink to="/about">Stuff</RouterLink>
 <RouterLink to="/">Sign In Here</RouterLink>
- <button type="button" id="btn2">Sign In Here</button>
 </template>

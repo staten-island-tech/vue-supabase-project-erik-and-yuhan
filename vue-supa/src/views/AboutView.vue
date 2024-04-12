@@ -4,10 +4,7 @@
 </template>
 <script>
 
-const DOMSelectors = {
-input1: document.querySelector("input")
 
-}
 
 </script>
 <style>

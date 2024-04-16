@@ -23,9 +23,19 @@ onMounted(() => {
   getCountries()
   getNames()
 })
+
+
+
 </script>
 
 <template>
+
+<input type="text" name="Email" id="Email">
+<button type="button" id="btn">Sign In</button>
+
+
+<input type="text" name="user" id="user">
+<button type="button" id="btn2">Sign Up</button>
 
 <ul>
     <li v-for="person in persons" :key="person.id">{{ person.Name }}</li>

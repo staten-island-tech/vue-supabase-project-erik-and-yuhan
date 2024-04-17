@@ -18,15 +18,26 @@ async function getNames() {
   persons.value = data
   console.log(data) 
 }
+const ider = ref([])
+async function ids(){
+  const most = await supabase.from('Users').select('id')
+  ider.value = most
+  console.log(most)
+}
+
 
 onMounted(() => {
   getCountries()
   getNames()
+  ids()
 })
 
-async function signup(){
-  const {data} = await supabase.from('Users').update({ })
-}
+
+
+
+/* async function signup(){
+  const {data} = await supabase.from('Users').insert({ id:  })
+} */
 </script>
 
 <template>

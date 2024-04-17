@@ -23,9 +23,20 @@ onMounted(() => {
   getCountries()
   getNames()
 })
+
+async function signup(){
+  const {data} = await supabase.from('Users').update({ })
+}
 </script>
 
 <template>
+
+<input type="text" name="Email" id="Email">
+<button type="button" id="btn">Sign In</button>
+
+
+<input type="text" name="user" id="user">
+<button type="button" id="btn2">Sign Up</button>
 
 <ul>
     <li v-for="person in persons" :key="person.id">{{ person.Name }}</li>
@@ -35,5 +46,6 @@ onMounted(() => {
     <li v-for="country in countries" :key="country.id">{{ country.name }}</li>
   </ul>
 
- 
+<RouterLink to="/about">Stuff</RouterLink>
+<RouterLink to="/">Sign In Here</RouterLink>
 </template>

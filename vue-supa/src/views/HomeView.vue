@@ -1,9 +1,11 @@
-<script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+<script>
+
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  
+<label for="Email">Email</label>
+<input type="text" name="Email" id="Email">
+
+
 </template>

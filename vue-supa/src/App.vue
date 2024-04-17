@@ -24,8 +24,9 @@ onMounted(() => {
   getNames()
 })
 
-
-
+async function signup(){
+  const {data} = await supabase.from('Users').update({ })
+}
 </script>
 
 <template>

@@ -1,6 +1,8 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { supabase } from './components/supabaseClient'
+import Auth from './components/AuthSupa.vue'
+import Account from './components/AccountSupa.vue'
 
 const countries = ref([])
 
@@ -22,11 +24,21 @@ const ider = ref([])
 async function ids(){
   const most = await supabase.from('Users').select('id')
   ider.value = most
-  console.log(most)
+  console.log(most.data.length)
 }
 
+const session = ref()
 
 onMounted(() => {
+
+  supabase.auth.getSession().then(({ data }) => {
+    session.value=data.session
+  })
+
+  supabase.auth.onAuthStateChange((_, _session) => {
+    session.value = _session
+  })
+
   getCountries()
   getNames()
   ids()
@@ -35,28 +47,15 @@ onMounted(() => {
 
 
 
-/* async function signup(){
-  const {data} = await supabase.from('Users').insert({ id:  })
-} */
+
 </script>
 
 <template>
 
-<input type="text" name="Email" id="Email">
-<button type="button" id="btn">Sign In</button>
+  <div class="container" style="padding: 50px 0 100px 0">
+    <Account v-if="session" :session="session" />
+    <Auth v-else />
+  </div>
 
 
-<input type="text" name="user" id="user">
-<button type="button" id="btn2">Sign Up</button>
-
-<ul>
-    <li v-for="person in persons" :key="person.id">{{ person.Name }}</li>
-  </ul>
-  
-  <ul>
-    <li v-for="country in countries" :key="country.id">{{ country.name }}</li>
-  </ul>
-
-<RouterLink to="/about">Stuff</RouterLink>
-<RouterLink to="/">Sign In Here</RouterLink>
 </template>

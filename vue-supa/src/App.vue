@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue'
 import { supabase } from './components/supabaseClient'
 import Auth from './components/AuthSupa.vue'
 import Account from './components/AccountSupa.vue'
+import SignIn from './components/SignIn.vue'
 
 const countries = ref([])
 
@@ -49,6 +50,8 @@ onMounted(() => {
   <div class="container" style="padding: 50px 0 100px 0">
     <Account v-if="session" :session="session" />
     <Auth v-else />
+    <SignIn></SignIn>
+    
   </div>
 
 

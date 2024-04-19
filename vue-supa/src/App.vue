@@ -20,12 +20,7 @@ async function getNames() {
   persons.value = data
   console.log(data) 
 }
-const ider = ref([])
-async function ids(){
-  const most = await supabase.from('Users').select('id')
-  ider.value = most
-  console.log(most.data.length)
-}
+
 
 const session = ref()
 
@@ -41,7 +36,6 @@ onMounted(() => {
 
   getCountries()
   getNames()
-  ids()
 })
 
 

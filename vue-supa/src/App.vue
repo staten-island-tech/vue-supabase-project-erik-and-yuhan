@@ -1,51 +1,44 @@
+<template>
+  <h1>Test</h1>
+  <div class="inputContainer">
+      <label for="email">Email:</label>
+      <input type="email" id="email" v-model="email">
+      </div>
+
+      <div class="inputContainer">
+          <label for="password">password:</label>
+          <input type="password" id="password" v-model="password">
+      </div>
+      <div class="buttonContainer">
+          <button @click = "CreateAccount">create</button>
+          <button @click = "login">login</button>
+          <button @click = "seeCurrentuser">see user</button>
+          <button @click = "logout">logout</button>
+      </div>
+</template>
+
 <script setup>
 import { ref, onMounted } from 'vue'
-import { supabase } from './components/supabaseClient'
 
-const countries = ref([])
+//connects input
+let email = ref("")
+let password = ref("")
 
-
-async function getCountries() {
-  const { data } = await supabase.from('countries').select()
-  countries.value = data
-  console.log(data)
-  
-
+//create account
+function CreateAccount() {
+  console.log ("create account")
 }
-const persons = ref([])
-async function getNames() {
-  const { data } = await supabase.from('persons').select()
-  persons.value = data
-  console.log(data) 
+//login
+function login() {
+  console.log ("login")
 }
-
-onMounted(() => {
-  getCountries()
-  getNames()
-})
-
-async function signup(){
-  const {data} = await supabase.from('Users').update({ })
+//seeCurrentuser
+function seeCurrentuser() {
+  console.log ("seeCurrentUser")
+}
+//logout
+function logout () {
+  console.log ("logot")
 }
 </script>
 
-<template>
-
-<input type="text" name="Email" id="Email">
-<button type="button" id="btn">Sign In</button>
-
-
-<input type="text" name="user" id="user">
-<button type="button" id="btn2">Sign Up</button>
-
-<ul>
-    <li v-for="person in persons" :key="person.id">{{ person.Name }}</li>
-  </ul>
-  
-  <ul>
-    <li v-for="country in countries" :key="country.id">{{ country.name }}</li>
-  </ul>
-
-<RouterLink to="/about">Stuff</RouterLink>
-<RouterLink to="/">Sign In Here</RouterLink>
-</template>

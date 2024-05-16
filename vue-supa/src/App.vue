@@ -15,6 +15,7 @@
           <button @click = "seeCurrentuser">see user</button>
           <button @click = "logout">logout</button>
       </div>
+      
 </template>
 
 <script setup>
@@ -40,5 +41,11 @@ function seeCurrentuser() {
 function logout () {
   console.log ("logout")
 }
+onMounted(() => {
+  login()
+  logout()
+  seeCurrentuser()
+  CreateAccount()
+})
 </script>
 

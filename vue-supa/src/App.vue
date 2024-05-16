@@ -1,26 +1,45 @@
+<template>
+  <h1>Test</h1>
+  <div class="inputContainer">
+      <label for="email">Email:</label>
+      <input type="email" id="email" v-model="email">
+      </div>
+
+      <div class="inputContainer">
+          <label for="password">password:</label>
+          <input type="password" id="password" v-model="password">
+      </div>
+      <div class="buttonContainer">
+          <button @click = "CreateAccount">create</button>
+          <button @click = "login">login</button>
+          <button @click = "seeCurrentuser">see user</button>
+          <button @click = "logout">logout</button>
+      </div>
+</template>
+
 <script setup>
 import { ref, onMounted } from 'vue'
+<<<<<<< HEAD
 import { supabase } from './components/supabaseClient'
 import Auth from './components/AuthSupa.vue'
 import Account from './components/AccountSupa.vue'
 import SignIn from './components/SignIn.vue'
+=======
+>>>>>>> yuhan
 
-const countries = ref([])
+//connects input
+let email = ref("")
+let password = ref("")
 
-
-async function getCountries() {
-  const { data } = await supabase.from('countries').select()
-  countries.value = data
-  console.log(data)
-  
-
+//create account
+function CreateAccount() {
+  console.log ("create account")
 }
-const persons = ref([])
-async function getNames() {
-  const { data } = await supabase.from('persons').select()
-  persons.value = data
-  console.log(data) 
+//login
+function login() {
+  console.log ("login")
 }
+<<<<<<< HEAD
 
 
 const session = ref()
@@ -56,3 +75,15 @@ onMounted(() => {
 
 
 </template>
+=======
+//seeCurrentuser
+function seeCurrentuser() {
+  console.log ("seeCurrentUser")
+}
+//logout
+function logout () {
+  console.log ("logot")
+}
+</script>
+
+>>>>>>> yuhan

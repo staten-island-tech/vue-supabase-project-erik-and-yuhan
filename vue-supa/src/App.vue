@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 
 //connects input
 let email = ref("")
@@ -41,11 +41,6 @@ function seeCurrentuser() {
 function logout () {
   console.log ("logout")
 }
-onMounted(() => {
-  login()
-  logout()
-  seeCurrentuser()
-  CreateAccount()
-})
+
 </script>
 

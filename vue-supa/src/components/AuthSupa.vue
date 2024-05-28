@@ -1,25 +1,37 @@
-<script setup>
-import { ref } from 'vue'
-import { supabase } from './supabaseClient'
+<script>
+import { RouterLink, RouterView } from 'vue-router';
+import { supabase } from './supabaseClient';
 
-const loading = ref(false)
-const email = ref('')
-
-const handleLogin = async () => {
-  try {
-    loading.value = true
-    const { error } = await supabase.auth.signInWithOtp({
-      email: email.value,
-    })
-    if (error) throw error
-    alert('Check your email for the login link!')
-  } catch (error) {
-    if (error instanceof Error) {
-      alert(error.message)
+export default {
+  data() {
+    return{
+      users: [], 
+      user: {
+        Email: '',
+        Password: '', 
+      }
     }
-  } finally {
-    loading.value = false
-  }
+  },
+methods: {
+  Submit() {
+    this.users.push(this.user)
+    this.user = {Email: '', Password: '',};
+    console.log(this.users)
+    this.users.forEach(async(user) => {
+      let { data, error } = await supabase.auth.signUp({
+        email: user.Email, 
+        password: user.Password, 
+      });
+      if (error) { 
+        console.log(error.message); 
+      }
+      else {
+        console.log(data);
+      }
+    }, 
+  )  
+}
+}
 }
 </script>
 

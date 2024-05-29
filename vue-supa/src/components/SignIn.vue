@@ -15,7 +15,7 @@ export default {
   methods: {
     async login(){
       try { 
-        const { user, session, error } = await supabase.auth.signInWithPassword({
+        const {user, session, error } = await supabase.auth.signInWithPassword({
           email: this.user.Email, 
           password: this.user.Password
         })
@@ -42,7 +42,12 @@ export default {
 </script>
 
 <template> 
-<form class="form-widget" @submit.prevent="Submit"></form>
+<form class="form-widget" @submit.prevent="Submit">
+<input type="text">
+<button type="button">Email</button>
+<input type="text">
+<button type="button">Password</button>
+</form>
 <h3></h3>
 
 </template>

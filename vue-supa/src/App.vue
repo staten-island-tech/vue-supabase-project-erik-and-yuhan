@@ -1,5 +1,6 @@
 <template>
   <h1>Test</h1>
+  <SignIn></SignIn>
   <div class="inputContainer">
       <label for="email">Email:</label>
       <input type="email" id="email" v-model="email">
@@ -20,6 +21,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import SignIn from './components/SignIn.vue';
 
 //connects input
 let email = ref("")

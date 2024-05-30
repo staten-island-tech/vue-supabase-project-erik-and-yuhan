@@ -1,27 +1,13 @@
 <template>
   <h1>Test</h1>
-  <SignIn></SignIn>
-  <div class="inputContainer">
-      <label for="email">Email:</label>
-      <input type="email" id="email" v-model="email">
-      </div>
+  <AuthSupa></AuthSupa>
 
-      <div class="inputContainer">
-          <label for="password">password:</label>
-          <input type="password" id="password" v-model="password">
-      </div>
-      <div class="buttonContainer">
-          <button @click = "CreateAccount">create</button>
-          <button @click = "login">login</button>
-          <button @click = "seeCurrentuser">see user</button>
-          <button @click = "logout">logout</button>
-      </div>
-      
 </template>
 
 <script setup>
 import { ref } from 'vue'
-import SignIn from './components/SignIn.vue';
+
+import AuthSupa from './components/AuthSupa.vue';
 
 //connects input
 let email = ref("")

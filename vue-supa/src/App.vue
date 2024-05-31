@@ -1,34 +1,21 @@
 <template>
   <h1>Test</h1>
-  <AuthSupa></AuthSupa>
+  <div id="app"> 
+    <SignIn />
+  </div>
 
 </template>
 
-<script setup>
-import { ref } from 'vue'
+<script>
 
-import AuthSupa from './components/AuthSupa.vue';
 
-//connects input
-let email = ref("")
-let password = ref("")
+import { SignIn } from './components/SignIn.vue';
 
-//create account
-function CreateAccount() {
-  console.log ("create account")
+export default { 
+  name: 'App', 
+  components: {
+    SignIn
+  }
 }
-//login
-function login() {
-  console.log ("login")
-}
-//seeCurrentuser
-function seeCurrentuser() {
-  console.log ("seeCurrentUser")
-}
-//logout
-function logout () {
-  console.log ("logout")
-}
-
 </script>
 

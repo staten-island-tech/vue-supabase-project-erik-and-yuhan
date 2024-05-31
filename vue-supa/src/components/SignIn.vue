@@ -1,53 +1,50 @@
+<template>
+<div class="signIn">
+  <h1>Sign In Here</h1>
+  <form @submit.prevent="signIn">
+  <div class="input">
+    <label for="email">Email</label>
+    <input type="email" v-model="email" required />
+  </div>
+  <div class="input">
+    <label for="password">Password</label>
+    <input type="password" v-model="password" required />
+  </div>
+  <button type="submit">Sign In</button>
+  <p v-if="error"> {{ error }}</p>
+  </form>
+</div>
+</template>
+
 <script>
+import { ref } from 'vue'
 import { supabase } from './supabaseClient';
-import { RouterLink, RouterView } from 'vue-router';
 
 export default {
-  data(){
-    return{
-      user: {
-        Email: '', 
-        Password: '', 
-      },
-      loggedIn: false
-    }
-  }, 
-  methods: {
-    async login(){
-      try { 
-        const {user, session, error } = await supabase.auth.signInWithPassword({
-          email: this.user.Email, 
-          password: this.user.Password
-        })
-        if (error) {
-          console.error(error.message)
-          document.querySelector("h3").textContent = ("Password or email incorrect")
-        }
-        else {
-          this.loggedIn = true; 
-          document.querySelector("h3").textContent = ("Logged in successfully")
-          this.$router.push('/home')
-        }
-       
+  name: 'SignIn', 
+  setup() {
+    const email = ref('')
+    const password = ref('')
+    const error = ref('')
+
+    const SignIn = async () => {
+      error.value = ''
+      const { user, error: signInError} = await supabase.auth.signIn({
+        email : email.value, 
+        password : password.value, 
+      })
+      if (signInError) {
+        error.value = signInError.message
+      } else {
+        console.log('User signed in!', user)
       }
-      catch(error) {
-          console.log(error.message)
-        }
-    }, 
-    Submit() {
-      this.login()
+    }
+    return { 
+      email,
+      password, 
+      error, 
+      SignIn, 
     }
   }
 }
 </script>
-
-<template> 
-<form class="form-widget" @submit.prevent="Submit">
-<input type="text">
-<button type="button">Email</button>
-<input type="text">
-<button type="button">Password</button>
-</form>
-<h3></h3>
-
-</template>

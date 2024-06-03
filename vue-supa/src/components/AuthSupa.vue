@@ -1,37 +1,27 @@
-<script>
-import { RouterLink, RouterView } from 'vue-router';
-import { supabase } from './supabaseClient';
+<script setup>
+import { ref } from 'vue'
+import { supabase } from './supabaseClient'
 
-export default {
-  data() {
-    return{
-      users: [], 
-      user: {
-        Email: '',
-        Password: '', 
-      }
+const loading = ref(false)
+const email = ref('')
+const password = ref('')
+
+const handleLogin = async () => {
+  try {
+    loading.value = true
+    const { error } = await supabase.auth.signUp({
+      email: email.value,
+      password: password.value,
+    })
+    if (error) throw error
+    alert('Check your email for the login link!')
+  } catch (error) {
+    if (error instanceof Error) {
+      alert(error.message)
     }
-  },
-methods: {
-  Submit() {
-    this.users.push(this.user)
-    this.user = {Email: '', Password: '',};
-    console.log(this.users)
-    this.users.forEach(async(user) => {
-      let { data, error } = await supabase.auth.signUp({
-        email: user.Email, 
-        password: user.Password, 
-      });
-      if (error) { 
-        console.log(error.message); 
-      }
-      else {
-        console.log(data);
-      }
-    }, 
-  )  
-}
-}
+  } finally {
+    loading.value = false
+  }
 }
 </script>
 
@@ -42,6 +32,7 @@ methods: {
       <p class="description">Sign in via magic link with your email below</p>
       <div>
         <input class="inputField" required type="email" placeholder="Your email" v-model="email" />
+        <input class="inputField" required type="email" placeholder="Your password" v-model="password">
       </div>
       <div>
         <input

@@ -1,21 +1,14 @@
 <template>
-  <h1>Test</h1>
-  <div id="app"> 
-    <SignIn />
+  <div>
+    <SignIn/>
   </div>
-
 </template>
 
-<script>
+<script setup>
+import SignIn from './components/SignIn.vue';
 
-
-import { SignIn } from './components/SignIn.vue';
-
-export default { 
-  name: 'App', 
-  components: {
-    SignIn
-  }
-}
 </script>
 
+<style  scoped>
+
+</style>

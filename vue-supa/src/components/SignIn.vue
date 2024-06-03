@@ -1,7 +1,7 @@
 <template>
 <div class="signIn">
   <h1>Sign In Here</h1>
-  <form @submit.prevent="signIn">
+  <form @submit.prevent="SignIn">
   <div class="input">
     <label for="email">Email</label>
     <input type="email" v-model="email" required />
@@ -29,7 +29,7 @@ export default {
 
     const SignIn = async () => {
       error.value = ''
-      const { user, error: signInError} = await supabase.auth.signIn({
+      const { user, error: signInError} = await supabase.auth.signInWithPassword({
         email : email.value, 
         password : password.value, 
       })
@@ -37,6 +37,7 @@ export default {
         error.value = signInError.message
       } else {
         console.log('User signed in!', user)
+        this.$router.push('/home')
       }
     }
     return { 

@@ -1,112 +1,67 @@
-<script>
+<template>
+   <div>
+    <h2>After showing your saved quotes, hit dislike to see another one!</h2>
+   
+    <div id="quote">
+      <h2>{{ currentQuote?.content }}</h2>
+      <h3>- {{ currentQuote?.author }}</h3>
+    </div>
+
+    <div class="buttons">
+      <button @click="addLike">Like</button>
+      <RouterLink to="/quotes">My quotes</RouterLink>
+    </div>
+  </div>
+</template>
+
+<script setup>
+
+import { ref, onMounted } from 'vue';
+import { RouterLink } from 'vue-router';
+import { supabase } from '@/stores/supabase';
+import { sessionStore } from '@/stores/session';
+import router from '@/router';
+
 const url = "https://api.quotable.io/random";
-let likedQuotes = [];
+const currentQuote = ref();
 
-async function createCard() {
-  document.querySelector("quote").textcontent = "";
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    const data = await response.json();
-    document.querySelector("quote").insertAdjacentHTML(
-      "beforeend",
-      `<div id="bird"
-    <h2 class="card-name">${data.content}</h2>
-    </div>`
-    );
-  } catch (error) {
-    console.error("error", error);
+onMounted(async () => {
+  if (!sessionStore().session.id) {
+    router.push("/login");
   }
-}
-createCard();
-async function createCardlike() {
-    document.querySelector("quote").textContent = "";
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    const data = await response.json();
-    document.querySelector("quote").insertAdjacentHTML(
-      "beforeend",
-      `<div id="bird"
-    <h2 class="card-name">${data.content}</h2>
-    </div>`
-    );
-    const quoteContent = document.querySelector("quote").textContent;
-    if (quoteContent) {
-      likedQuotes.push(quoteContent);
-      console.log(likedQuotes);
-    }
-  } catch (error) {
-    console.error("error", error);
-  }
-}
+  await getApiData();
+})
 
-async function createCardDislike() {
-    document.querySelector("quote").textContent = "";
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    const data = await response.json();
-    document.querySelector("quote").insertAdjacentHTML(
-      "beforeend",
-      `<div id="bird"
-    <h2 class="card-name">${data.content}</h2>
-    </div>`
-    );
-  } catch (error) {
-    console.error("error", error);
-  }
-}
-
-function showQuotes() {
-    document.querySelector("quote").textcontent = "";
-  const copies = likedQuotes.slice();
-  for (let i = 0; i < copies.length - 1; i++) {
-    for (let j = 0; j < copies.length - 1 - i; j++) {
-      if (copies[j].length > copies[j + 1].length) {
-        const temp = copies[j];
-        copies[j] = copies[j + 1];
-        copies[j + 1] = temp;
+async function getApiData() {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
       }
+      currentQuote.value = await response.json();
+    } catch (error) {
+      console.error(error);
     }
-  }
-  copies.forEach((quote, index) => {
-    document.querySelector("quote").insertAdjacentHTML(
-      "beforeend",
-      `<div>
-    <p>${index + 1}. ${quote}</p>
-    </div>`
-    );
-  });
+}
+
+async function addLike () {
+  try {
+    console.log(sessionStore().session.id, currentQuote.value.content, currentQuote.value.author)
+        const { error } = await supabase.from('quotes').insert({
+      user_id: sessionStore().session.id,
+      quote: currentQuote.value?.content,
+      text: currentQuote.value?.author
+    });
+    if (error) throw error;
+    } catch (error) {
+        if (error instanceof Error) {
+            alert(error.message);
+        }
+    }
 }
 
 </script>
 
-<template>
-   
-  <body class="cool">
- 
-      <h2>After showing your saved quotes, hit dislike to see another one!</h2>
-   
-    <div id="quote"></div>
-    <form @submit.prevent="createCardlike()">
-    <button type="text" id="btn1">Like</button>
-</form>
-<form @submit.prevent="createCardDislike()">
-    <button type="text" id="btn2">Dislike</button>
-</form>
-<form @submit.prevent="showQuotes">
-    <button type="text" id="btn3">My Quotes</button>
-</form>
-    
-  </body>
-<h3>hi</h3>
+<style scoped>
 
-
-</template>
+</style>

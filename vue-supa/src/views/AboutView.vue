@@ -1,51 +1,53 @@
 <template>
-  <div class="signIn">
-    <h1>Sign In Here</h1>
-    <form @submit.prevent="SignIn">
-    <div class="input">
-      <label for="email">Email</label>
-      <input type="email" v-model="email" required />
+  <div>
+    <div v-for="quote in likedQuotes">
+      <h2>{{ quote.content }}</h2>
+      <h3>{{ quote.author }}</h3>
+      <button @click="removeLike(quote)">Remove</button>
     </div>
-    <div class="input">
-      <label for="password">Password</label>
-      <input type="password" v-model="password" required />
-    </div>
-    <button type="submit">Sign In</button>
-    <p v-if="error"> {{ error }}</p>
-    </form>
   </div>
-  </template>
-  
-  <script>
-  import { ref } from 'vue'
-  import { supabase } from './supabaseClient';
-  
-  export default {
-    name: 'SignIn', 
-    setup() {
-      const email = ref('')
-      const password = ref('')
-      const error = ref('')
-  
-      const SignIn = async () => {
-        error.value = ''
-        const { user, error: signInError} = await supabase.auth.signInWithPassword({
-          email : email.value, 
-          password : password.value, 
-        })
-        if (signInError) {
-          error.value = signInError.message
-        } else {
-          console.log('User signed in!', user)
-          this.$router.push('/about')
-        }
-      }
-      return { 
-        email,
-        password, 
-        error, 
-        SignIn, 
-      }
+</template>
+
+<script setup>
+
+import { ref, onMounted } from 'vue';
+import { supabase } from '@/stores/supabase';
+import { sessionStore } from '@/stores/session';
+
+const likedQuotes = ref();
+
+onMounted(async () => {
+  await getLikedQuotes();
+})
+
+async function getLikedQuotes () {
+  try {
+    const { data, error } = await supabase.from('quotes').select().eq("user_id", sessionStore().id);
+    if (error) throw error
+
+    likedQuotes.value = data;
+  } catch (error) {
+    if (error instanceof Error) {
+      alert(error.message)
     }
   }
-  </script>
+}
+
+async function removeLike (quote) {
+  try {
+    const { error } = await supabase.from("market").delete().eq("quote", quote.content).eq("author", quote.author).eq("user_id", sessionStore().session.id);
+    if (error) throw error;
+    const index = likedQuotes.value.findIndex((quote2) => quote2.content == quote.content && quote2.author == quote2.author);
+    likedQuotes.value.splice(index, 1);
+  } catch (error) {
+    if (error instanceof Error) {
+      alert(error.message);
+    }
+  }
+}
+
+</script>
+
+<style scoped>
+
+</style>

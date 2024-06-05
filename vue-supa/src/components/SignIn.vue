@@ -37,7 +37,6 @@ export default {
         error.value = signInError.message
       } else {
         console.log('User signed in!', user)
-        this.$router.push('/about')
       }
     }
     return { 

@@ -86,11 +86,6 @@ function showQuotes() {
   });
 }
 
-document.querySelector("btn2").addEventListener("click", createCardDislike);
-
-document.querySelector("btn1").addEventListener("click", createCardlike);
-
-document.querySelector("btn3").addEventListener("click", showQuotes);
 </script>
 
 <template>
@@ -100,9 +95,15 @@ document.querySelector("btn3").addEventListener("click", showQuotes);
       <h2>After showing your saved quotes, hit dislike to see another one!</h2>
    
     <div id="quote"></div>
+    <form @submit.prevent="createCardlike()">
     <button type="text" id="btn1">Like</button>
+</form>
+<form @submit.prevent="createCardDislike()">
     <button type="text" id="btn2">Dislike</button>
+</form>
+<form @submit.prevent="showQuotes">
     <button type="text" id="btn3">My Quotes</button>
+</form>
     
   </body>
 <h3>hi</h3>

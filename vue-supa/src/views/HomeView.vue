@@ -3,14 +3,14 @@ const url = "https://api.quotable.io/random";
 let likedQuotes = [];
 
 async function createCard() {
-  document.queryselect("quote").textcontent = "";
+  document.querySelector("quote").textcontent = "";
   try {
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const data = await response.json();
-    document.queryselect("quote").insertAdjacentHTML(
+    document.querySelector("quote").insertAdjacentHTML(
       "beforeend",
       `<div id="bird"
     <h2 class="card-name">${data.content}</h2>
@@ -22,20 +22,20 @@ async function createCard() {
 }
 createCard();
 async function createCardlike() {
-    document.queryselect("quote").textContent = "";
+    document.querySelector("quote").textContent = "";
   try {
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const data = await response.json();
-    document.queryselect("quote").insertAdjacentHTML(
+    document.querySelector("quote").insertAdjacentHTML(
       "beforeend",
       `<div id="bird"
     <h2 class="card-name">${data.content}</h2>
     </div>`
     );
-    const quoteContent = document.queryselect("quote").textContent;
+    const quoteContent = document.querySelector("quote").textContent;
     if (quoteContent) {
       likedQuotes.push(quoteContent);
       console.log(likedQuotes);
@@ -46,14 +46,14 @@ async function createCardlike() {
 }
 
 async function createCardDislike() {
-    document.queryselect("quote").textContent = "";
+    document.querySelector("quote").textContent = "";
   try {
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const data = await response.json();
-    document.queryselect("quote").insertAdjacentHTML(
+    document.querySelector("quote").insertAdjacentHTML(
       "beforeend",
       `<div id="bird"
     <h2 class="card-name">${data.content}</h2>
@@ -65,7 +65,7 @@ async function createCardDislike() {
 }
 
 function showQuotes() {
-    document.queryselect("quote").textcontent = "";
+    document.querySelector("quote").textcontent = "";
   const copies = likedQuotes.slice();
   for (let i = 0; i < copies.length - 1; i++) {
     for (let j = 0; j < copies.length - 1 - i; j++) {
@@ -77,7 +77,7 @@ function showQuotes() {
     }
   }
   copies.forEach((quote, index) => {
-    document.queryselect("quote").insertAdjacentHTML(
+    document.querySelector("quote").insertAdjacentHTML(
       "beforeend",
       `<div>
     <p>${index + 1}. ${quote}</p>
@@ -86,11 +86,11 @@ function showQuotes() {
   });
 }
 
-document.queryselect("btn2").addEventListener("click", createCardDislike);
+document.querySelector("btn2").addEventListener("click", createCardDislike);
 
-document.queryselect("btn1").addEventListener("click", createCardlike);
+document.querySelector("btn1").addEventListener("click", createCardlike);
 
-document.queryselect("btn3").addEventListener("click", showQuotes);
+document.querySelector("btn3").addEventListener("click", showQuotes);
 </script>
 
 <template>

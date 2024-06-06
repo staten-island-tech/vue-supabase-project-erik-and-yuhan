@@ -1,4 +1,4 @@
-/* color palette from <https://github.com/vuejs/theme> */
+
 :root {
   --vt-c-white: #ffffff;
   --vt-c-white-soft: #f8f8f8;
@@ -21,7 +21,7 @@
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
 }
 
-/* semantic color variables for this project */
+
 :root {
   --color-background: var(--vt-c-white);
   --color-background-soft: var(--vt-c-white-soft);
@@ -55,6 +55,7 @@
 *::after {
   box-sizing: border-box;
   margin: 0;
+  padding: 0;
   font-weight: normal;
 }
 
@@ -84,3 +85,72 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+h2, h3 {
+  margin-bottom: 0.5rem;
+}
+
+h2 {
+  color: var(--color-heading);
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+h3 {
+  color: var(--color-text);
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+#quote {
+  padding: 2rem;
+  margin: 1rem 0;
+  border: 1px solid var(--color-border);
+  background: var(--color-background-soft);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--vt-c-indigo);
+  color: var(--vt-c-white);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: var(--vt-c-indigo);
+}
+
+button:disabled {
+  background-color: var(--vt-c-divider-light-2);
+  cursor: not-allowed;
+}
+
+button + button {
+  margin-left: 0.5rem;
+}
+
+a {
+  text-decoration: none;
+  color: var(--vt-c-indigo);
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--vt-c-indigo);
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+a:hover {
+  background-color: var(--vt-c-indigo);
+  color: var(--vt-c-white);
+}
+

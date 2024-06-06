@@ -63,5 +63,54 @@ async function addLike () {
 </script>
 
 <style scoped>
+.title {
+  font-size: 1.5rem;
+  color: #333;
+}
 
+#quote {
+  margin-top: 20px;
+}
+
+#quote h2 {
+  font-size: 3.2rem;
+  color: #d39a20;
+}
+
+#quote h3 {
+  font-size: 2rem;
+  color: #d12e11c0;
+}
+
+.buttons {
+  margin-top: 20px;
+}
+
+.like-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.like-button:hover {
+  background-color: #0056b3;
+}
+
+.link {
+  text-decoration: none;
+  padding: 10px 20px;
+  border: 1px solid #007bff;
+  color: #007bff;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.link:hover {
+  background-color: #007bff;
+  color: #fff;
+}
 </style>

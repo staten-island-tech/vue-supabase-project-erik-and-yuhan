@@ -22,6 +22,7 @@ onMounted(async () => {
 
 async function getLikedQuotes () {
   try {
+    console.log(sessionStore())
     const { data, error } = await supabase.from('quotes').select().eq("user_id", sessionStore().id);
     if (error) throw error
 

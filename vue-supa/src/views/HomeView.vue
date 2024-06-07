@@ -73,12 +73,12 @@ async function addLike () {
 }
 
 #quote h2 {
-  font-size: 3.2rem;
+  font-size: 2.0rem;
   color: #d39a20;
 }
 
 #quote h3 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: #d12e11c0;
 }
 

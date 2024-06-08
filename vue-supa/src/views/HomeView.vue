@@ -50,7 +50,7 @@ async function addLike () {
         const { error } = await supabase.from('quotes').insert({
       user_id: sessionStore().session.id,
       quote: currentQuote.value?.content,
-      text: currentQuote.value?.author
+      author: currentQuote.value?.author
     });
     if (error) throw error;
     } catch (error) {

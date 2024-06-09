@@ -38,7 +38,7 @@ async function removeLike (quote) {
   try {
     const { error } = await supabase.from("quotes").delete().eq("quote", quote.content).eq("author", quote.author).eq("user_id", sessionStore().session.id);
     if (error) throw error;
-    const index = likedQuotes.value.findIndex((quote2) => quote2.content == quote.quote && quote2.author == quote2.author);
+    const index = likedQuotes.value.findIndex((quote2) => quote2.content == quote2.quote && quote2.author == quote2.author);
     likedQuotes.value.splice(index, 1);
   } catch (error) {
     if (error instanceof Error) {
